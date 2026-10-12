@@ -1,12 +1,12 @@
 # Zona Calcio Lab clip format
 
 A small JSON format to exchange tagged moments of a football match between
-Zona Calcio Lab tools: **PlayTrace** (live tagging), **MatchRazor** (automated
-video analysis) and **ClipTrimmer** (clip export).
+Zona Calcio Lab tools, such as **PlayTrace** (live tagging) and the tools for
+video analysis and clip export.
 
 Each tool keeps its own internal files and reads/writes this format at the
-edges, so a match tagged in PlayTrace can be cut in ClipTrimmer or reviewed in
-MatchRazor without a dedicated importer for every pair of tools.
+edges, so a match tagged in PlayTrace can be cut into clips or reviewed in a
+video analysis tool without a dedicated importer for every pair of tools.
 
 - Format id: `zcl-clips`
 - Current version: **1**
@@ -115,7 +115,7 @@ other tools can ignore them and still write them back unchanged:
 
 ```json
 "extra": {
-  "matchrazor": {"possesso": "osservata", "descrizione": "Uscita bassa con il terzino"},
+  "videoanalysis": {"possession": "observed", "description": "Build-up through the full-back"},
   "playtrace": {"tag_id": 3, "timestamp_absolute": "12/10/26 15:23:45"}
 }
 ```
@@ -130,16 +130,16 @@ A tool must keep `extra` entries it does not know when it rewrites a file.
   refuses files with a version higher than the one it supports, with a clear
   message.
 
-## Mapping from the current formats
+## Mapping from PlayTrace
 
-| Concept | PlayTrace export (schema 2) | MatchRazor clip JSON | ClipTrimmer playlist 1 |
-|---|---|---|---|
-| Match | `match_info` | `partita` | — |
-| Video | — | master video + `offset` | `clips[].source` |
-| Instant | event, `time_period` "23:45 1T" → `period` 1, `t` 1425 | `t` | — |
-| Section | — | `start`, `end` | `start`, `end` |
-| Label | `tag_name` | `fase` | `name` |
-| Team | `team` | (observed team) | — |
+| Concept | PlayTrace export (schema 2) | zcl-clips |
+|---|---|---|
+| Match | `match_info` | `match` |
+| Video | — | `sources[]` without `uri` |
+| Instant | event, `time_period` "23:45 1T" | `period` 1, `t` 1425 |
+| Label | `tag_name` | `label` |
+| Team | `team` | `team` |
+| Other fields | `tag_id`, `timestamp_absolute` | `extra.playtrace` |
 
 ## License
 
