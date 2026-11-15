@@ -66,6 +66,7 @@ video_time = sources[source].kickoffs[period] + clip_time
 | `venue` | Venue |
 | `home`, `away` | Team names |
 | `period_duration` | Nominal minutes per period (e.g. `45`) |
+| `observed` | `"home"` or `"away"`: the team the analysis is about, when there is one. Tools that think in terms of observed/opponent map it to `team` |
 
 All fields are optional.
 
@@ -108,9 +109,42 @@ Each clip is either an **instant** or a **section**:
 | `team` | no | `"home"`, `"away"` or missing (not attributed) |
 | `name` | no | Free name, used for example as the output file name |
 | `note` | no | Free text |
+| `favorite` | no | `true` when the clip is marked as a favourite. Missing means not a favourite |
+| `restart` | no | Restart the clip starts from: `"kick_off"`, `"goal_kick"`, `"throw_in"`, `"free_kick"`, `"corner"`, `"penalty"`. Tools show their own translated labels |
+| `origin` | no | Pitch cell where the action starts, see [Pitch cells](#pitch-cells) |
 | `extra` | no | Object with tool-specific fields, see below |
 
 A clip has either `t` or both `start` and `end`, never both kinds.
+
+### Pitch cells
+
+`origin` places the start of the action on a 4 × 4 grid, seen by the **reference
+team** attacking towards the opponent's goal:
+
+```json
+"origin": {"column": 3, "row": "B"}
+```
+
+- **Reference team**: `match.observed` when present, otherwise the home team.
+- `column` `1`-`4` along the pitch: `1` the 26 m in front of the reference team's
+  own goal (about 10 m beyond its penalty area), `2` and `3` the rest of its own
+  half and of the opponent's half, split by the halfway line, `4` the 26 m in front
+  of the opponent's goal.
+- `row` `"A"`-`"D"` across the pitch, left to right for the reference team facing
+  the opponent's goal: `A` and `D` outside the width of the penalty area, `B` and
+  `C` inside it, split by the middle of the pitch.
+
+The cell does not depend on the camera: a tool that reads cells on the screen
+converts them with the attacking direction of the reference team in that period.
+Coarser areas follow from the cell: thirds `1 | 2+3 | 4`, halves `1+2 | 3+4`,
+lanes `A | B+C | D`, sides `A+B | C+D`.
+
+### Period of video-time clips
+
+A clip in video time has no `period`. When a tool needs it (to show `2T 05:30` or
+to filter by half), it takes the period whose `kickoffs`-`ends` range of the
+clip's source contains the clip start; without `ends`, the last kick-off before
+the start. A clip outside every range (half-time break) has no period.
 
 ### `extra`
 

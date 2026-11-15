@@ -22,7 +22,8 @@
         "venue": {"type": "string"},
         "home": {"type": "string"},
         "away": {"type": "string"},
-        "period_duration": {"type": "number", "exclusiveMinimum": 0}
+        "period_duration": {"type": "number", "exclusiveMinimum": 0},
+        "observed": {"enum": ["home", "away"]}
       }
     },
     "sources": {
@@ -64,6 +65,16 @@
           "team": {"enum": ["home", "away"]},
           "name": {"type": "string"},
           "note": {"type": "string"},
+          "favorite": {"type": "boolean"},
+          "restart": {"enum": ["kick_off", "goal_kick", "throw_in", "free_kick", "corner", "penalty"]},
+          "origin": {
+            "type": "object",
+            "required": ["column", "row"],
+            "properties": {
+              "column": {"enum": [1, 2, 3, 4]},
+              "row": {"enum": ["A", "B", "C", "D"]}
+            }
+          },
           "extra": {"type": "object"}
         },
         "oneOf": [

@@ -2,7 +2,7 @@
   "format": "zcl-clips",
   "version": 1,
   "generator": {"name": "Example tool", "version": "1.0"},
-  "match": {"date": "2026-10-11", "home": "Home FC", "away": "Away FC"},
+  "match": {"date": "2026-10-11", "home": "Home FC", "away": "Away FC", "observed": "home"},
   "sources": [
     {"id": "main", "uri": "https://www.youtube.com/watch?v=XXXXXXXXXXX", "kickoffs": {"1": 312.0, "2": 3611.5}, "ends": {"1": 3105.0, "2": 6498.0}},
     {"id": "tactical", "uri": "C:\\Video\\2026-10-11_tactical-camera.mp4"}
@@ -11,6 +11,7 @@
     {"source": "main", "period": 1, "t": 1425, "pre": 5, "post": 3, "label": "Shot", "team": "home"},
     {"source": "tactical", "start": 763.5, "end": 781.0, "label": "Build-up", "name": "12.43 build-up",
      "extra": {"videoanalysis": {"possession": "observed", "description": "Build-up through the full-back"}}},
-    {"source": "main", "start": 5020.0, "end": 5034.0, "name": "goal", "note": "Video time, no period"}
+    {"source": "main", "start": 5020.0, "end": 5034.0, "name": "goal", "note": "Video time, no period",
+     "favorite": true, "restart": "corner", "origin": {"column": 4, "row": "D"}}
   ]
 }
