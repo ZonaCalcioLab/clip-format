@@ -72,7 +72,7 @@ All fields are optional.
 ## `sources`
 
 ```json
-{"id": "main", "uri": "https://www.youtube.com/watch?v=XXXXXXXXXXX", "kickoffs": {"1": 312.0, "2": 3611.5}}
+{"id": "main", "uri": "https://www.youtube.com/watch?v=XXXXXXXXXXX", "kickoffs": {"1": 312.0, "2": 3611.5}, "ends": {"1": 3105.0, "2": 6498.0}}
 ```
 
 | Field | Required | Description |
@@ -80,7 +80,11 @@ All fields are optional.
 | `id` | yes | Unique within the file, referenced by clips |
 | `uri` | no | Absolute local path or YouTube link (`https://www.youtube.com/watch?v=…`). Missing when there is no video yet (live tagging) |
 | `kickoffs` | no | Kick-off position of each period in this video, in seconds: keys `"1"`, `"2"` and, if needed, `"3"`, `"4"` (extra time) |
+| `ends` | no | End position of each period in this video (final whistle, added time included), in seconds, same keys as `kickoffs`. `ends[p] > kickoffs[p]` when both are present |
 | `title` | no | Human-readable label |
+
+`ends` is for tools that work on whole periods, for example cutting the
+halves out of a full match recording or skipping the half-time break.
 
 A file with clips from several videos lists several sources.
 

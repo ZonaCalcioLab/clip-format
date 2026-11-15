@@ -4,7 +4,7 @@
   "generator": {"name": "Example tool", "version": "1.0"},
   "match": {"date": "2026-10-11", "home": "Home FC", "away": "Away FC"},
   "sources": [
-    {"id": "main", "uri": "https://www.youtube.com/watch?v=XXXXXXXXXXX", "kickoffs": {"1": 312.0, "2": 3611.5}},
+    {"id": "main", "uri": "https://www.youtube.com/watch?v=XXXXXXXXXXX", "kickoffs": {"1": 312.0, "2": 3611.5}, "ends": {"1": 3105.0, "2": 6498.0}},
     {"id": "tactical", "uri": "C:\\Video\\2026-10-11_tactical-camera.mp4"}
   ],
   "clips": [

@@ -38,6 +38,11 @@
             "type": "object",
             "propertyNames": {"enum": ["1", "2", "3", "4"]},
             "additionalProperties": {"type": "number", "minimum": 0}
+          },
+          "ends": {
+            "type": "object",
+            "propertyNames": {"enum": ["1", "2", "3", "4"]},
+            "additionalProperties": {"type": "number", "minimum": 0}
           }
         }
       }
