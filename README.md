@@ -1,4 +1,4 @@
-# Zona Calcio Lab clip format
+# zcl-clips — Zona Calcio Lab clip format
 
 A small JSON format to exchange tagged moments of a football match between
 Zona Calcio Lab tools, such as **PlayTrace** (live tagging) and the tools for
