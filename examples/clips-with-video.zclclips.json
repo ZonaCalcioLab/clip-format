@@ -8,10 +8,11 @@
     {"id": "tactical", "uri": "C:\\Video\\2026-10-11_tactical-camera.mp4"}
   ],
   "clips": [
-    {"source": "main", "period": 1, "t": 1425, "pre": 5, "post": 3, "label": "Shot", "team": "home"},
-    {"source": "tactical", "start": 763.5, "end": 781.0, "label": "Build-up", "name": "12.43 build-up",
+    {"uid": "3f2b8c1e-6d4a-4e9b-9a57-0c1d2e3f4a5b", "source": "main", "period": 1, "t": 1425, "pre": 5, "post": 3,
+     "label": "Shot", "team": "home"},
+    {"uid": "a7c41d02-58e3-4b6f-8f21-9d0e7b6c5a43", "source": "tactical", "start": 763.5, "end": 781.0, "label": "Build-up", "name": "12.43 build-up",
      "extra": {"videoanalysis": {"possession": "observed", "description": "Build-up through the full-back"}}},
-    {"source": "main", "start": 5020.0, "end": 5034.0, "name": "goal", "note": "Video time, no period",
+    {"uid": "0e9d8c7b-6a5f-4e3d-8c2b-1a0f9e8d7c6b", "source": "main", "start": 5020.0, "end": 5034.0, "name": "goal", "note": "Video time, no period",
      "favorite": true, "restart": "corner", "origin": {"column": 4, "row": "D"}}
   ]
 }

@@ -101,6 +101,7 @@ Each clip is either an **instant** or a **section**:
 | Field | Required | Description |
 |---|---|---|
 | `source` | yes | `id` of a source |
+| `uid` | no | Unique identifier of the clip, see [Clip identifier](#clip-identifier) |
 | `period` | no | `1`, `2`, `3`, `4`. When set, times are period time; otherwise video time |
 | `t` | instant | Moment of the event |
 | `pre`, `post` | no | Instant only: seconds to keep before and after `t` when it becomes a clip. Tools use their own default when missing (PlayTrace XML uses 5 and 3) |
@@ -115,6 +116,29 @@ Each clip is either an **instant** or a **section**:
 | `extra` | no | Object with tool-specific fields, see below |
 
 A clip has either `t` or both `start` and `end`, never both kinds.
+
+### Clip identifier
+
+`uid` lets tools recognise the same clip when a file goes from one tool (or person)
+to another and comes back modified, even if its times, label or note changed:
+
+```json
+{"uid": "3f2b8c1e-6d4a-4e9b-9a57-0c1d2e3f4a5b", "source": "main", "period": 1, "t": 1425.0, "label": "Shot"}
+```
+
+- It is a UUID ([RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)) written as a
+  lowercase string. Version 4 (random) is recommended.
+- The tool that **creates** a clip writes its `uid`.
+- A tool that **edits** a clip (times, label, team, note, favourite, restart,
+  origin…) keeps its `uid`.
+- A clip that is **duplicated** or **split** keeps its `uid` only in the original:
+  every new clip gets a new one. A merged clip keeps the `uid` of the first clip.
+- A tool that rewrites a file keeps the `uid` of every clip as it read it. It may
+  add a `uid` to clips that have none, which is useful before sharing the file.
+- Two clips with the same `uid` in one file are invalid: validators reject the
+  file, readers warn and treat the second clip as a new one.
+- `uid` identifies the clip, not its file: the same clip keeps its `uid` in every
+  copy of the file and in every format the tool converts it to.
 
 ### Pitch cells
 
@@ -159,6 +183,8 @@ other tools can ignore them and still write them back unchanged:
 ```
 
 A tool must keep `extra` entries it does not know when it rewrites a file.
+It should also keep clip fields it does not know (fields added by later versions
+of this specification, such as `uid`).
 
 ## Versioning
 
