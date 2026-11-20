@@ -83,11 +83,20 @@ All fields are optional.
 | `kickoffs` | no | Kick-off position of each period in this video, in seconds: keys `"1"`, `"2"` and, if needed, `"3"`, `"4"` (extra time) |
 | `ends` | no | End position of each period in this video (final whistle, added time included), in seconds, same keys as `kickoffs`. `ends[p] > kickoffs[p]` when both are present |
 | `title` | no | Human-readable label |
+| `match` | no | Match information for the clips of this source, same fields as [`match`](#match). Used in files with clips from several matches |
 
 `ends` is for tools that work on whole periods, for example cutting the
 halves out of a full match recording or skipping the half-time break.
 
-A file with clips from several videos lists several sources.
+A file with clips from several videos lists several sources. When they come from
+different matches (for example a playlist), each source can carry its own
+`match`: for the clips of that source it replaces the file-level `match`, and
+fields it does not have are taken from the file-level `match`.
+
+```json
+{"id": "m2", "uri": "https://www.youtube.com/watch?v=YYYYYYYYYYY",
+ "match": {"date": "2026-06-05", "home": "Team A", "away": "Team B", "observed": "home"}}
+```
 
 ## `clips`
 
@@ -149,7 +158,7 @@ team** attacking towards the opponent's goal:
 "origin": {"column": 3, "row": "B"}
 ```
 
-- **Reference team**: `match.observed` when present, otherwise the home team.
+- **Reference team**: `observed` of the clip's `sources[].match`, then `match.observed`, otherwise the home team.
 - `column` `1`-`4` along the pitch: `1` the 26 m in front of the reference team's
   own goal (about 10 m beyond its penalty area), `2` and `3` the rest of its own
   half and of the opponent's half, split by the halfway line, `4` the 26 m in front

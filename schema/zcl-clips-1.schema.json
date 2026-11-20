@@ -35,6 +35,7 @@
           "id": {"type": "string", "minLength": 1},
           "uri": {"type": "string", "minLength": 1},
           "title": {"type": "string"},
+          "match": {"$ref": "#/properties/match"},
           "kickoffs": {
             "type": "object",
             "propertyNames": {"enum": ["1", "2", "3", "4"]},
