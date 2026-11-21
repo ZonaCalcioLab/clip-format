@@ -68,6 +68,7 @@
           "team": {"enum": ["home", "away"]},
           "name": {"type": "string"},
           "note": {"type": "string"},
+          "description": {"type": "string"},
           "favorite": {"type": "boolean"},
           "restart": {"enum": ["kick_off", "goal_kick", "throw_in", "free_kick", "corner", "penalty"]},
           "origin": {

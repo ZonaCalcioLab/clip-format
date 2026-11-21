@@ -118,7 +118,8 @@ Each clip is either an **instant** or a **section**:
 | `label` | no | Category of the moment (tag, phase), e.g. `"Shot"` |
 | `team` | no | `"home"`, `"away"` or missing (not attributed) |
 | `name` | no | Free name, used for example as the output file name |
-| `note` | no | Free text |
+| `note` | no | Free text: the analyst's comment |
+| `description` | no | What happens in the clip, as a sentence (e.g. "White shirts: throw-in and long ball to the far post"). Distinct from `name` (short title) and `note` (comment) |
 | `favorite` | no | `true` when the clip is marked as a favourite. Missing means not a favourite |
 | `restart` | no | Restart the clip starts from: `"kick_off"`, `"goal_kick"`, `"throw_in"`, `"free_kick"`, `"corner"`, `"penalty"`. Tools show their own translated labels |
 | `origin` | no | Pitch cell where the action starts, see [Pitch cells](#pitch-cells) |
